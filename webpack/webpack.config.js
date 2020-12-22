@@ -2,10 +2,11 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './src/js_compiled/index.js',
+  entry: ['webpack/hot/dev-server', '/src/js_compiled/index.js'],
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -25,5 +26,6 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
 }
