@@ -9,6 +9,7 @@
       "dom",
       "esnext.asynciterable"
     ],
+    "noEmit": true,
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",

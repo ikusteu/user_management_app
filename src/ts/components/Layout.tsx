@@ -8,11 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // import from slices
 import { logout, getUserToken } from '../features/login/loginSlice'
 
-// import from lib
-import { FCProps } from '../lib/typeDeclarations'
-
 // component function
-const Layout: React.FC<FCProps> = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   // map to redux store
   const dispatch = useDispatch()
   const token = useSelector(getUserToken)

@@ -1,11 +1,7 @@
-import { ReactNode } from 'react'
+//import { ReactNode } from 'react'
+import { FieldHookConfig } from 'formik'
 
 /*******  Component Props  *******/
-
-// layout interface
-export interface FCProps {
-  children?: ReactNode
-}
 
 // props for input form
 export interface InputFormProps {
@@ -18,14 +14,11 @@ export interface InputFormProps {
   errorResponse?: string | null | undefined
 }
 
-// single user page props
-export interface SingleUserPageProps extends FCProps {
-  match: {
-    params: {
-      id: string
-    }
-  }
-}
+// custom text field
+export type TextInputProps = {
+  placeholder: string
+  style?: React.CSSProperties | undefined
+} & FieldHookConfig<string>
 
 /*******  Forms  *******/
 
@@ -33,7 +26,6 @@ export interface SingleUserPageProps extends FCProps {
 export enum UserActionType {
   Login = 'login',
   AddNewUser = 'addNewUser',
-  EditUser = 'editUser',
 }
 
 // initial form values interface

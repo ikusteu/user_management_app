@@ -1,13 +1,10 @@
 // import from packages
 import React from 'react'
-import { useField, FieldHookConfig } from 'formik'
+import { useField } from 'formik'
 import { TextField } from '@material-ui/core'
 
-// local types and interfaces
-type TextInputProps = {
-  placeholder: string
-  style?: React.CSSProperties | undefined
-} & FieldHookConfig<string>
+// import from lib
+import { TextInputProps } from '../lib/typeDeclarations'
 
 // custom text input
 const TextInput: React.FC<TextInputProps> = ({

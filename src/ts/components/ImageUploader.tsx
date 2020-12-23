@@ -1,10 +1,10 @@
 // import from packages
 import React, { useEffect, useState } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, IconButton, useMediaQuery } from '@material-ui/core'
+import CropIcon from '@material-ui/icons/Crop'
+import SaveIcon from '@material-ui/icons/Save'
+import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore'
 import { FieldHelperProps, FieldInputProps } from 'formik'
-
-//import local styles
-import './crop.css'
 
 // import from loacl components
 import CropperElement from './CropperElement'
@@ -15,6 +15,12 @@ type ImageUploaderProps = FieldHelperProps<string> & FieldInputProps<string>
 
 // component function
 const ImageUploader: React.FC<ImageUploaderProps> = ({ value, setValue }) => {
+  // set breakpoints
+  const smallScr = useMediaQuery('(max-width:600px)')
+  const medScr = useMediaQuery('(max-width:760px)')
+  // set responsive size for height and width
+  const size = smallScr ? 150 : 300
+
   // init state
 
   // saves uploaded image for 'image restore'
@@ -80,7 +86,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ value, setValue }) => {
           alignItems: 'center',
         }}
       >
-        <div style={{ margin: 'auto', width: 300, height: 300 }}>
+        <div style={{ margin: 'auto', width: size, height: size }}>
           {cropping ? (
             <CropperElement
               key={imageKey}
@@ -88,7 +94,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ value, setValue }) => {
               updateTempImage={setTempImage}
             />
           ) : (
-            <div style={{ width: 300, height: 300, margin: 'auto' }}>
+            <div style={{ width: size, height: size, margin: 'auto' }}>
               <div
                 style={{
                   height: '100%',
@@ -104,26 +110,46 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ value, setValue }) => {
         </div>
       </div>
       <div style={{ width: '100%', textAlign: 'center', marginTop: '8px' }}>
-        <Button
-          style={{ marginLeft: '8px' }}
-          onClick={e => handleClick(e)}
-          variant='contained'
-          color='primary'
-        >
-          {cropping ? 'SAVE' : 'CROP'}
-        </Button>
-        <Button
-          style={{ marginLeft: '8px' }}
-          onClick={e => handleRestore(e)}
-          variant='contained'
-          color='primary'
-        >
-          RESTORE IMAGE
-        </Button>
-        <UploadButton
-          style={{ marginLeft: '8px' }}
-          handleUpload={handleUpload}
-        />
+        {!smallScr && (
+          <Button
+            style={{ margin: '4px' }}
+            onClick={e => handleClick(e)}
+            variant='contained'
+            size={medScr ? 'small' : 'medium'}
+            color='primary'
+          >
+            {cropping ? 'SAVE' : 'CROP'}
+          </Button>
+        )}
+        {smallScr && (
+          <IconButton
+            style={{ marginLeft: '8px' }}
+            onClick={e => handleClick(e)}
+            color='primary'
+          >
+            {cropping ? <SaveIcon /> : <CropIcon />}
+          </IconButton>
+        )}
+        {smallScr ? (
+          <IconButton
+            style={{ margin: '4px' }}
+            onClick={e => handleRestore(e)}
+            color='primary'
+          >
+            <SettingsBackupRestoreIcon />
+          </IconButton>
+        ) : (
+          <Button
+            style={{ margin: '4px' }}
+            onClick={e => handleRestore(e)}
+            variant='contained'
+            size={medScr ? 'small' : 'medium'}
+            color='primary'
+          >
+            RESTORE
+          </Button>
+        )}
+        <UploadButton style={{ margin: '4px' }} handleUpload={handleUpload} />
       </div>
     </>
   )

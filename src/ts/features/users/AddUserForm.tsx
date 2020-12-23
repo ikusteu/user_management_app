@@ -2,12 +2,19 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { Button } from '@material-ui/core'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 // import from local packages
 import InputForm from '../../components/InputForm'
 
 // import from slices
-import { requestAdd, getEligibleId, initAdd, getAddStatus } from './usersSlice'
+import {
+  requestAdd,
+  getEligibleId,
+  redirected,
+  getAddStatus,
+} from './usersSlice'
 
 // import from lib
 import { UserActionType, AddUserFormValues } from '../../lib/typeDeclarations'
@@ -38,28 +45,32 @@ const AddUserForm: React.FC = () => {
     setSubmitting(false)
   }
 
-  // init add / set addSuccessful to false on mount
-  useEffect(() => {
-    dispatch(initAdd(null))
-  }, [])
-
   // listen to addSuccessful and redirect back to users display page
   useEffect(() => {
     if (redirect) {
+      dispatch(redirected(null))
       history.push('/users')
     }
   }, [redirect])
 
   return (
-    <InputForm
-      type={UserActionType.AddNewUser}
-      style={{
-        width: '66%',
-        margin: '0 auto',
-      }}
-      onSubmit={handleAddUser}
-      errorResponse={}
-    />
+    <>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        color='primary'
+        onClick={() => history.push('/users')}
+      >
+        BACK TO USERS
+      </Button>
+      <InputForm
+        type={UserActionType.AddNewUser}
+        style={{
+          width: '66%',
+          margin: '0 auto',
+        }}
+        onSubmit={handleAddUser}
+      />
+    </>
   )
 }
 

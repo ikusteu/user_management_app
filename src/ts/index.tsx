@@ -1,3 +1,7 @@
+// babel
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
 // import from packages
 import React from 'react'
 import ReactDOM from 'react-dom'

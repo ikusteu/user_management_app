@@ -47,7 +47,7 @@ export const fetchUsers = createAsyncThunk(
   }
 )
 
-// create thunk for new user adding
+// create thunk for adding of new users
 export const requestAdd = createAsyncThunk(
   'users/requestAdd',
   async (data: UserInterface) => {
@@ -70,6 +70,27 @@ export const requestAdd = createAsyncThunk(
   }
 )
 
+// create thunk for user removal
+export const requestRemove = createAsyncThunk(
+  'users/requestRemove',
+  async (id: number) => {
+    try {
+      // call delete request
+      const res = await axios.delete(`https://reqres.in/api/users/${id}`)
+      // if successful process user back to match UserInterface
+      if (res.status === 204) {
+        return id
+      } else throw 'something went wrong'
+      // if error, catch before it gets serialized
+    } catch (err) {
+      // extract validation respones ie. "user not found"
+      // eslint-disable-next-line no-console
+      console.log(err)
+      return 0
+    }
+  }
+)
+
 // create users slice
 const usersSlice = createSlice<
   UsersStateInterface,
@@ -79,7 +100,8 @@ const usersSlice = createSlice<
   name: 'users',
   initialState,
   reducers: {
-    initAdd: state => {
+    // add successful to false when redirected
+    redirected: state => {
       state.addSuccessful = false
     },
   },
@@ -115,6 +137,14 @@ const usersSlice = createSlice<
         state.list.push(user)
       }
     })
+    build.addCase(requestRemove.fulfilled, (state, action) => {
+      if (action.payload) {
+        // extract id from payload
+        const id = action.payload
+        // remove user from list
+        state.list = state.list.filter(user => user.id !== id)
+      }
+    })
   },
 })
 
@@ -135,7 +165,7 @@ export const getUserById = (
 ): UserInterface | undefined => state.users.list.find(user => user.id === id)
 
 // export action creators
-export const { initAdd } = usersSlice.actions
+export const { redirected } = usersSlice.actions
 
 // export reducer
 export default usersSlice.reducer

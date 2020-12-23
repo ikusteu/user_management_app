@@ -7,6 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { AnimatePresence, motion } from 'framer-motion'
 
 // import from slices
 import {
@@ -22,6 +23,13 @@ import Layout from './components/Layout'
 import LoginForm from './features/login/LoginForm'
 import UserDisplayPage from './features/users/UserDisplayPage'
 import AddUserForm from './features/users/AddUserForm'
+
+// framer motion args
+const motionArgs = {
+  initial: { opacity: 0, scale: 0.95 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { duration: 0.2 },
+}
 
 // component function
 const App: React.FC = () => {
@@ -42,10 +50,22 @@ const App: React.FC = () => {
     <Router>
       <Layout>
         <Switch>
-          <Route path='/' exact component={LoginForm} />
-          <Route path='/users' exact component={UserDisplayPage} />
-          <Route path='/add_user' exact component={AddUserForm} />
-          <Redirect to='/' />
+          <AnimatePresence>
+            <Route path='/' key='login' exact>
+              <LoginForm />
+            </Route>
+            <Route path='/users' key='users' exact>
+              <motion.div {...motionArgs}>
+                <UserDisplayPage />
+              </motion.div>
+            </Route>
+            <Route path='/add_user' key='adduser' exact>
+              <motion.div {...motionArgs}>
+                <AddUserForm />
+              </motion.div>
+            </Route>
+            <Redirect to='/' />
+          </AnimatePresence>
         </Switch>
       </Layout>
     </Router>

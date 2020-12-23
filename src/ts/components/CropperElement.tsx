@@ -2,9 +2,7 @@
 import React, { useEffect, useRef } from 'react'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.min.css'
-
-//import local styles
-import './crop.css'
+import { useMediaQuery } from '@material-ui/core'
 
 // local interface
 interface CropperElementProps {
@@ -17,6 +15,11 @@ const CropperElement: React.FC<CropperElementProps> = ({
   src,
   updateTempImage,
 }) => {
+  // set breakpoint
+  const smallScr = useMediaQuery('(max-width:600px)')
+  // set responsive size for height and width
+  const size = smallScr ? 150 : 300
+
   // set ref
   const imageElement = useRef<HTMLImageElement>(null)
 
@@ -38,7 +41,7 @@ const CropperElement: React.FC<CropperElementProps> = ({
 
   return (
     <div
-      style={{ width: 300, height: 300, margin: 'auto' }}
+      style={{ width: size, height: size, margin: 'auto' }}
       className='img-container'
     >
       <img ref={imageElement} src={src} />

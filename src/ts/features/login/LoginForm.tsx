@@ -11,7 +11,7 @@ import InputForm from '../../components/InputForm'
 import { requestLogin, getUserToken, getLoginError } from './loginSlice'
 
 // import from lib
-import { UserActionType, FormValuesInterface } from '../../lib/typeDeclarations'
+import { UserActionType, LoginFormValues } from '../../lib/typeDeclarations'
 
 // component function
 const LoginForm: React.FC = () => {
@@ -25,7 +25,7 @@ const LoginForm: React.FC = () => {
 
   // handle submit function
   const handleLoginSubmit = async (
-    data: FormValuesInterface,
+    data: LoginFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     // disable submit button
@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
         style={{ textAlign: 'center', margin: '3rem auto 0 auto' }}
         component='h1'
       >
-        Welcome to User Manager Pro
+        Welcome to User Manager
       </Typography>
       <Typography
         variant='h5'

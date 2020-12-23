@@ -11,19 +11,20 @@ import { Formik, Form, Field } from 'formik'
 
 // import from local components
 import TextInput from './TextInput'
+import ImageInput from './ImageInput'
 
 // import from lib
-import { InputFormProps } from '../lib/typeDeclarations'
 import {
   getInitialValues,
   getValidationSchema,
   splitCamel,
 } from '../lib/functions'
+import { InputFormProps } from '../lib/typeDeclarations'
 
 // style for text fields
 const textInputStyle = {
   width: '100%',
-  margin: '0 auto 1rem auto',
+  margin: '1rem auto 1rem auto',
 }
 
 // component function
@@ -59,7 +60,7 @@ const InputForm: React.FC<InputFormProps> = ({
             {Object.keys(initialValues).map(key => {
               const label = splitCamel(key)
 
-              if (key === 'keepMeLoggedIn') {
+              if (typeof initialValues[key] === 'boolean') {
                 return (
                   <div
                     key={key}
@@ -76,6 +77,8 @@ const InputForm: React.FC<InputFormProps> = ({
                     </Typography>
                   </div>
                 )
+              } else if (key === 'avatar') {
+                return <ImageInput name={key} key={key} type='input' />
               } else {
                 return (
                   <TextInput

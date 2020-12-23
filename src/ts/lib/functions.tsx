@@ -4,17 +4,24 @@ import * as yup from 'yup'
 
 // get validation schema based on type
 
-export const getValidationSchema = (type: types.UserActionType): any => {
+export const getValidationSchema = (type: types.UserActionType): unknown => {
   const yupRequired = yup.string().required()
 
   const password = yupRequired
-  const email = yupRequired
-  const firstName = yupRequired
-  const lastName = yupRequired
+  const email = yupRequired.email()
+  const firstName = yupRequired.matches(
+    /^[a-zA-Z%s]+$/,
+    'Please check your name, only letters allowed'
+  )
+  const lastName = yupRequired.matches(
+    /^[a-zA-Z%s]+$/,
+    'Please check your name, only letters allowed'
+  )
+
   const avatar = yupRequired
 
   const adminShape = { email, password }
-  const userShape = { firstName, lastName, email, avatar }
+  const userShape = { avatar, firstName, lastName, email }
 
   return yup.object(
     type === types.UserActionType.Login ? adminShape : userShape
@@ -29,11 +36,11 @@ export const getInitialValues = (
   const email = ''
   const firstName = ''
   const lastName = ''
-  const avatar = ''
+  const avatar = '/images/avatar.jpg'
   const keepMeLoggedIn = false
 
   const adminShape = { email, password, keepMeLoggedIn }
-  const userShape = { firstName, lastName, email, avatar }
+  const userShape = { avatar, firstName, lastName, email }
 
   return type === types.UserActionType.Login ? adminShape : userShape
 }
@@ -50,7 +57,7 @@ export const toLowerFirst = (string: string): string => {
 
 // split camelCase with spaces and Capital Firsts
 export const splitCamel = (string: string): string => {
-  return toUpperFirst(string).replace(/([A-Z])/, letter => ' ' + letter)
+  return toUpperFirst(string.replace(/([A-Z])/, letter => ' ' + letter))
 }
 
 // split camelCase string with spaces and Capital Firsts
@@ -72,31 +79,24 @@ export const toSnakeCase = (string: string): string => {
 export const processUserForApi = (
   user: types.UserInterface
 ): types.ApiUserInterface => {
-  const newUser: any = {}
+  const newUser: types.ApiUserInterface | Record<string, unknown> = {}
   Object.keys(user).forEach(key => {
     const newKey = toSnakeCase(key)
     newUser[newKey] = user[key]
   })
-  return newUser
+  return (newUser as unknown) as types.ApiUserInterface
 }
 
 // process user from api response to camelCased keys
 export const processUserFromApi = (
   user: types.ApiUserInterface
 ): types.UserInterface => {
-  const newUser: any = {}
+  const newUser: types.UserInterface | Record<string, unknown> = {}
   Object.keys(user).forEach(key => {
     const newKey = toCamelCase(key)
     newUser[newKey] = user[key]
   })
-  return newUser
-}
-
-// process array of users for pus / post api call
-export const processUsersForApi = (
-  users: types.UserInterface[]
-): types.ApiUserInterface[] => {
-  return users.map(user => processUserForApi(user))
+  return (newUser as unknown) as types.UserInterface
 }
 
 // process array of users from api response
