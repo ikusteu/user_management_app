@@ -1,0 +1,33 @@
+.cropper-container {
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    /* overflow: hidden; */
+}
+
+.img-container {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+.img {
+    height: 100%;
+    width: auto;
+}
+
+
+.img-preview {
+    height: 200px;
+    width: 200px;
+    float: left; 
+    margin: auto; 
+    margin-left: 10px;
+}
+
+@madia screen and (max-width: 600px) {
+    .img-preview {
+        width: 80px;
+        height: 80px;
+    }
+}
