@@ -11,7 +11,7 @@ import InputForm from '../../components/InputForm'
 import { requestLogin, getUserToken, getLoginError } from './loginSlice'
 
 // import from lib
-import { UserActionType, LoginFormValues } from '../../lib/typeDeclarations'
+import { LoginFormValues } from '../../lib/typeDeclarations'
 
 // component function
 const LoginForm: React.FC = () => {
@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
         Please Login to Continue
       </Typography>
       <InputForm
-        type={UserActionType.Login}
+        type='login'
         style={{
           width: '66%',
           margin: '0 auto',

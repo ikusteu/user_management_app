@@ -1,6 +1,3 @@
-//import { ReactNode } from 'react'
-import { FieldHookConfig } from 'formik'
-
 /*******  Component Props  *******/
 
 // props for input form
@@ -14,19 +11,10 @@ export interface InputFormProps {
   errorResponse?: string | null | undefined
 }
 
-// custom text field
-export type TextInputProps = {
-  placeholder: string
-  style?: React.CSSProperties | undefined
-} & FieldHookConfig<string>
-
 /*******  Forms  *******/
 
 // type of form / redux user action
-export enum UserActionType {
-  Login = 'login',
-  AddNewUser = 'addNewUser',
-}
+export type UserActionType = 'login' | 'addNewUser'
 
 // initial form values interface
 export interface LoginFormValues {

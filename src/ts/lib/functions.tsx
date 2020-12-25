@@ -11,11 +11,11 @@ export const getValidationSchema = (type: types.UserActionType): unknown => {
   const email = yupRequired.email()
   const firstName = yupRequired.matches(
     /^[a-zA-Z%s]+$/,
-    'Please check your name, only letters allowed'
+    'Please write your name using only basic ASCII letters'
   )
   const lastName = yupRequired.matches(
     /^[a-zA-Z%s]+$/,
-    'Please check your name, only letters allowed'
+    'Please write your name using only basic ASCII letters'
   )
 
   const avatar = yupRequired
@@ -23,9 +23,7 @@ export const getValidationSchema = (type: types.UserActionType): unknown => {
   const adminShape = { email, password }
   const userShape = { avatar, firstName, lastName, email }
 
-  return yup.object(
-    type === types.UserActionType.Login ? adminShape : userShape
-  )
+  return yup.object(type === 'login' ? adminShape : userShape)
 }
 
 // get initial values for input form
@@ -42,7 +40,7 @@ export const getInitialValues = (
   const adminShape = { email, password, keepMeLoggedIn }
   const userShape = { avatar, firstName, lastName, email }
 
-  return type === types.UserActionType.Login ? adminShape : userShape
+  return type === 'login' ? adminShape : userShape
 }
 
 // first letter upper case

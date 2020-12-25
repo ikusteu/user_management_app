@@ -19,12 +19,23 @@ import {
   getValidationSchema,
   splitCamel,
 } from '../lib/functions'
-import { InputFormProps } from '../lib/typeDeclarations'
+import { LoginFormValues, AddUserFormValues } from '../lib/typeDeclarations'
 
 // style for text fields
 const textInputStyle = {
   width: '100%',
   margin: '1rem auto 1rem auto',
+}
+
+// local interface -- prop-types conversion safe
+interface InputFormProps {
+  type: 'login' | 'addNewUser'
+  style?: React.CSSProperties | Record<string, undefined> // empty object intersection to be translated as 'object' in prop-types
+  onSubmit: (
+    data: LoginFormValues | AddUserFormValues, // imported types -- prop-types define this as func
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => void
+  errorResponse?: string | null
 }
 
 // component function
@@ -78,15 +89,21 @@ const InputForm: React.FC<InputFormProps> = ({
                   </div>
                 )
               } else if (key === 'avatar') {
-                return <ImageInput name={key} key={key} type='input' />
+                return (
+                  <ImageInput
+                    // type='input'
+                    name={key}
+                    key={key}
+                  />
+                )
               } else {
                 return (
                   <TextInput
                     key={key}
                     style={textInputStyle}
-                    type='input'
+                    // type='input'
                     name={key}
-                    as={TextField}
+                    // as={TextField}
                     placeholder={label}
                   />
                 )

@@ -4,14 +4,16 @@ import { Button, IconButton, useMediaQuery } from '@material-ui/core'
 import CropIcon from '@material-ui/icons/Crop'
 import SaveIcon from '@material-ui/icons/Save'
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore'
-import { FieldHelperProps, FieldInputProps } from 'formik'
 
 // import from loacl components
 import CropperElement from './CropperElement'
 import UploadButton from './UploadButton'
 
-// local interface
-type ImageUploaderProps = FieldHelperProps<string> & FieldInputProps<string>
+// local interface -- prop-types conversion safe
+interface ImageUploaderProps {
+  value: string
+  setValue: (value: string) => void
+}
 
 // component function
 const ImageUploader: React.FC<ImageUploaderProps> = ({ value, setValue }) => {

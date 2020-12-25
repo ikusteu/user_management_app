@@ -3,12 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: ['webpack/hot/dev-server', '/src/ts/index.tsx'],
-  // entry: '/src/ts/index.tsx',
-  // entry: {
-  //   index: '/src/ts/index.tsx',
-  //   App: '/src/ts/App.tsx',
-  // },
+  entry: '/src/ts/index.tsx',
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -17,12 +12,6 @@ module.exports = {
     filename: 'index_bundle.js',
     publicPath: './',
   },
-  // output: {
-  //   path: path.join(process.cwd(), 'test'),
-  //   filename: '[name].js',
-  //   sourceMapFilename: '[name].js.map',
-  //   // publicPath: '/dist',
-  // },
   module: {
     rules: [
       {
@@ -54,12 +43,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(process.cwd(), '/src/index.html'),
+      template: path.join(process.cwd(), '/public/index.html'),
     }),
     new MiniCssExtractPlugin(),
   ],
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-  },
+  // devServer: {
+  //   port: 3000,
+  //   historyApiFallback: true,
+  // },
 }

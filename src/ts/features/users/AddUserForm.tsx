@@ -17,7 +17,7 @@ import {
 } from './usersSlice'
 
 // import from lib
-import { UserActionType, AddUserFormValues } from '../../lib/typeDeclarations'
+import { AddUserFormValues } from '../../lib/typeDeclarations'
 
 // component function
 const AddUserForm: React.FC = () => {
@@ -63,7 +63,7 @@ const AddUserForm: React.FC = () => {
         BACK TO USERS
       </Button>
       <InputForm
-        type={UserActionType.AddNewUser}
+        type='addNewUser'
         style={{
           width: '66%',
           margin: '0 auto',
