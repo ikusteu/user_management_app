@@ -6,7 +6,8 @@
   "repository": "https://github.com/ikusteu/user_management_app",
   "scripts": {
     "start": "webpack serve --mode development --config ./webpack/webpack-dev.config.js --hot",
-    "compile": "npx babel --config-file ./compile_config/babel.config.json --out-dir lib ./src --extensions .tsx",
+    "review": "webpack serve --mode development --config ./webpack/webpack-review.config.js --hot",
+    "compile": "npx babel --config-file ./compile_config/babel.config.json --out-dir ./src/js_compiled ./src/ts --extensions .tsx",
     "build": "webpack --mode production --config ./webpack/webpack-build.config.js"
   },
   "keywords": [],

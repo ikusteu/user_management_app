@@ -34,7 +34,7 @@ export const getInitialValues = (
   const email = ''
   const firstName = ''
   const lastName = ''
-  const avatar = '/images/avatar.jpg'
+  const avatar = '/public/avatar.jpg'
   const keepMeLoggedIn = false
 
   const adminShape = { email, password, keepMeLoggedIn }

@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: '/src/ts/index.tsx',
+  entry: '/src/js_compiled/index.js',
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.js'],
   },
   output: {
     path: path.join(process.cwd(), 'dist'),
@@ -15,7 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -47,8 +47,4 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
-  // devServer: {
-  //   port: 3000,
-  //   historyApiFallback: true,
-  // },
 }
