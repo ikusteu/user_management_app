@@ -42,12 +42,10 @@ export const getInitialValues = (
 
   return type === 'login' ? adminShape : userShape
 }
-
 // first letter upper case
 export const toUpperFirst = (string: string): string => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
-
 // first letter to lower case
 export const toLowerFirst = (string: string): string => {
   return string.charAt(0).toLowerCase() + string.slice(1)

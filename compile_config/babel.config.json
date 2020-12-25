@@ -2,10 +2,7 @@
   "presets": ["@babel/typescript"],
   "plugins": [
     [
-      "babel-plugin-typescript-to-proptypes",
-      {
-        "comments": true
-      }
-    ]
+      "babel-plugin-typescript-to-proptypes"
+    ]    
   ]
   }
