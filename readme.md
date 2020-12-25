@@ -52,7 +52,7 @@ makes "final" buid in /dist/ folder, containing index.html, main.css and index_b
 
 /webpack/ contains webpack config files for different scripts/modes
 
-/compile_config contains babel.config.json to be while compiling instead of root /babel.config.json which is used for dev servers and build
+/compile_config contains babel.config.json to used be while compiling instead of root /babel.config.json which is used for dev servers and build
 
 --folder structure of /src/ts/folder is split in:
 
