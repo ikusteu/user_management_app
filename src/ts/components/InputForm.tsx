@@ -24,15 +24,16 @@ import { LoginFormValues, AddUserFormValues } from '../lib/typeDeclarations'
 // style for text fields
 const textInputStyle = {
   width: '100%',
-  margin: '1rem auto 1rem auto',
+  margin: '1rem auto 4px auto',
+  height: 54, // fixed container, prevents CLS of error message
 }
 
 // local interface -- prop-types conversion safe
 interface InputFormProps {
   type: 'login' | 'addNewUser'
-  style?: React.CSSProperties | Record<string, undefined> // empty object intersection to be translated as 'object' in prop-types
+  style?: React.CSSProperties
   onSubmit: (
-    data: LoginFormValues | AddUserFormValues, // imported types -- prop-types define this as func
+    data: LoginFormValues | AddUserFormValues, // imported types -- prop-types defines this as func
     setSubmitting: (isSubmitting: boolean) => void
   ) => void
   errorResponse?: string | null
@@ -54,7 +55,7 @@ const InputForm: React.FC<InputFormProps> = ({
           width: '100%',
           fontStyle: 'italic',
           color: 'red',
-          marginBottom: '1rem',
+          marginBottom: '2rem',
         }}
         component='p'
       >
@@ -98,14 +99,14 @@ const InputForm: React.FC<InputFormProps> = ({
                 )
               } else {
                 return (
-                  <TextInput
-                    key={key}
-                    style={textInputStyle}
-                    // type='input'
-                    name={key}
-                    // as={TextField}
-                    placeholder={label}
-                  />
+                  <div style={textInputStyle} key={key}>
+                    <TextInput
+                      // type='input'
+                      name={key}
+                      // as={TextField}
+                      placeholder={label}
+                    />
+                  </div>
                 )
               }
             })}

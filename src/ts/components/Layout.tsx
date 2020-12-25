@@ -1,5 +1,5 @@
 // import from packages
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ReactNode } from 'react'
 import { Paper, Typography, Button, useMediaQuery } from '@material-ui/core'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import { useLocation, useHistory } from 'react-router-dom'
@@ -8,8 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 // import from slices
 import { logout, getUserToken } from '../features/login/loginSlice'
 
+// local interface -- prop-types conversion safe
+interface LayoutProps {
+  children?: ReactNode
+}
+
 // component function
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   // map to redux store
   const dispatch = useDispatch()
   const token = useSelector(getUserToken)
@@ -46,7 +51,7 @@ const Layout: React.FC = ({ children }) => {
     <Paper
       style={{
         minHeight: '66vh',
-        width: smallScr ? '100%' : '66vw',
+        width: smallScr ? '100%' : '66%',
         margin: smallScr ? '0' : '1.5rem auto 0 auto',
         overflow: 'hidden',
       }}

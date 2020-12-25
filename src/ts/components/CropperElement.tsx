@@ -1,5 +1,5 @@
 // import from packages
-import React, { useEffect, useRef, MouseEvent } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.min.css'
 import { useMediaQuery } from '@material-ui/core'

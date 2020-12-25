@@ -6,13 +6,11 @@ import { TextField } from '@material-ui/core'
 // import from lib
 import {} from '../lib/typeDeclarations'
 
-// local interface -- prop-types conversion safe ****test****
+// local interface -- prop-types conversion safe
 type TextInputProps = {
   name: string
-  key: string
-  style?: React.CSSProperties | Record<string, undefined> // empty object intersection to be translated as 'object' in prop-types
+  style?: React.CSSProperties
   placeholder: string
-  //as: {TextField} // *********test
 }
 
 // custom text input
@@ -21,7 +19,6 @@ const TextInput: React.FC<TextInputProps> = ({
   style,
   ...props
 }) => {
-  // const type = 'input' *********test*********
   const [field, meta] = useField(props)
   return (
     <div style={style}>

@@ -4,10 +4,7 @@
     [
       "babel-plugin-typescript-to-proptypes",
       {
-        "typeCheck": true,
-        "forbidExtraProps": true,
-        "comments": true,
-        "impicitChildren": true
+        "comments": true
       }
     ]
   ]

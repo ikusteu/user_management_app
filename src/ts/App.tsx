@@ -15,13 +15,12 @@ import {
   getEndOfList,
   getPageToFetch,
 } from './features/users/usersSlice'
-
 import { getUserToken } from './features/login/loginSlice'
 
 // import from local components
 import Layout from './components/Layout'
 import LoginForm from './features/login/LoginForm'
-import UserDisplayPage from './features/users/UserDisplayPage'
+import UsersDisplayPage from './features/users/UsersDisplayPage'
 import AddUserForm from './features/users/AddUserForm'
 
 // framer motion args
@@ -56,7 +55,7 @@ const App: React.FC = () => {
             </Route>
             <Route path='/users' key='users' exact>
               <motion.div {...motionArgs}>
-                <UserDisplayPage />
+                <UsersDisplayPage />
               </motion.div>
             </Route>
             <Route path='/add_user' key='adduser' exact>

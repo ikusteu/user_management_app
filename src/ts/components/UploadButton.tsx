@@ -6,7 +6,7 @@ import Compress from 'client-compress'
 
 interface UploadButtonProps {
   handleUpload: (file: string) => void
-  style: React.CSSProperties | Record<string, undefined> // empty object intersection to be translated as 'object' in prop-types
+  style: React.CSSProperties
 }
 
 // styled upload button

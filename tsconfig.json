@@ -29,6 +29,7 @@
     "node_modules",
     "build",
     "dist",
+    "lib",
     "scripts",
     "acceptance-tests",
     "webpack",
